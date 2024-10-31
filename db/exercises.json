@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Romanian deadlift",
+        "description": "Lift movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f4635891c"}, 
+            {"$oid": "672142e7ba6df45f4635891e"}
+        ],
+        "usedWith": [
+            "Barbell",
+            "Resistance band"
+        ]
+    },
+    {
+        "name": "Squat",
+        "description": "Push movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f4635891e"}, 
+            {"$oid": "672142e7ba6df45f46358920"}],
+        "usedWith": [
+            "Barbell",
+            "Squat machine"
+        ]
+    },
+    {
+        "name": "Bench press",
+        "description": "Push movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f46358921"},
+            {"$oid": "672142e7ba6df45f4635891d"}],
+        "usedWith": [
+            "Barbell",
+            "Dumbbells"
+        ]
+    },
+    {
+        "name": "Lat pulldown",
+        "description": "Pull movement down",
+        "belongsTo": [
+            {"$oid":"672142e7ba6df45f4635891f"}],
+        "usedWith": [
+            "Lat machine"
+        ]
+    },
+    {
+        "name": "Single arm row",
+        "description": "Pull movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f4635891f"}],
+        "usedWith": [
+            "Dumbbells",
+            "Resistance band"
+        ]
+    },
+    {
+        "name": "Russian twist",
+        "description": "Stability movement",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f46358920"}],
+        "usedWith": [
+            "Dumbbells",
+            "No weights"
+        ]
+    },
+    {
+        "name": "Bicep curls",
+        "description": "Pull movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f46358922"}],
+        "usedWith": [
+            "Kettlebells",
+            "Dumbbells"
+        ]
+    },
+    {
+        "name": "Shoulder press",
+        "description": "Push movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f46358921"},
+            {"$oid": "672142e7ba6df45f4635891f"}],
+        "usedWith": [
+            "Barbell",
+            "Dumbbells"
+        ]
+    },
+    {
+        "name": "Farmer's walk",
+        "description": "Stability movement",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f46358920"}],
+        "usedWith": [
+            "Kettlebells",
+            "No weights"
+        ]
+    },
+    {
+        "name": "Calf raises",
+        "description": "Push movement up",
+        "belongsTo": [
+            {"$oid": "672142e7ba6df45f4635891e"}],
+        "usedWith": [
+            "Dumbbells",
+            "Resistance band",
+            "No weights"
+        ]
+    }
+]
