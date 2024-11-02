@@ -14,6 +14,8 @@ router.get('/', (req, res) => {
     .catch((err) => {res.json(err)})
 })
 
+router.get('/')
+
 
 module.exports = router
 

@@ -2,7 +2,7 @@ const router = require('express').Router()
 const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {isAuthenticated} = require('../middleware/jwt.middleware')
+const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 // POST /signup route
 router.post('/signup', (req, res) => {

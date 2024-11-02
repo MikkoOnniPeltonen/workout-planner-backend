@@ -11,6 +11,7 @@ const express = require("express");
 const cors = require('cors')
 
 const app = express();
+app.use(express.json())
 app.use(cors())
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
@@ -18,14 +19,17 @@ require("./config")(app);
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
+const musclegroupsRoutes = require('./routes/musclegroups.routes')
+const workoutsRoutes = require('./routes/workouts.routes')
+const exercisesRoutes = require('./routes/exercises.routes')
 
 app.use("/api", indexRoutes);
 
 app.use('/auth', require('./routes/auth.routes'))
 
-app.use('/exercises', require('./routes/exercises.routes'))
-app.use('/workouts', require('./routes/workouts.routes'))
-app.use('/musclegroups', require('./routes/musclegroups.routes'))
+app.use('/exercises', exercisesRoutes)
+app.use('/workouts', workoutsRoutes)
+app.use('/musclegroups', musclegroupsRoutes)
 
 app.get('/', (req, res) => {
     res.send('Server is up and running!')

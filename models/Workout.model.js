@@ -14,6 +14,11 @@ const workoutSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Exercise'
     }],
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Creator is required."]
+    }
   },
   {    
     timestamps: true
