@@ -9,6 +9,7 @@ const { isAuthenticated } = require('../middleware/jwt.middleware')
 router.get('/', (req, res) => {
 
     Workout.find()
+    .populate('exercises')
     .then((allWorkouts) => {
         res.json(allWorkouts)
     })
