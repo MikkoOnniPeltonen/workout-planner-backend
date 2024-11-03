@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
 router.get('/:workoutId', (req, res) => {
 
     Workout.findById(req.params.workoutId)
+    .populate('exercises')
     .then((foundWorkout) => {
         res.json(foundWorkout)
     })
