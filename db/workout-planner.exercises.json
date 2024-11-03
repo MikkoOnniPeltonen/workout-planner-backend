@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589fa"
-  },
+  "_id": "6727bef8ba6df45f463589fa",
   "name": "Romanian deadlift",
   "description": "lift movement up",
   "belongsTo": [
@@ -14,9 +12,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589fb"
-  },
+  "_id": "6727bef8ba6df45f463589fb",
   "name": "Squat",
   "description": "push movement up",
   "belongsTo": [
@@ -29,9 +25,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589fc"
-  },
+  "_id": "6727bef8ba6df45f463589fc",
   "name": "Bench press",
   "description": "push movement up",
   "belongsTo": [
@@ -44,9 +38,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589fd"
-  },
+  "_id": "6727bef8ba6df45f463589fd",
   "name": "Lat pulldown",
   "description": "pull movement down",
   "belongsTo": [
@@ -57,9 +49,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589fe"
-  },
+  "_id": "6727bef8ba6df45f463589fe",
   "name": "Single arm row",
   "description": "pull movement up",
   "belongsTo": [
@@ -71,9 +61,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f463589ff"
-  },
+  "_id": "6727bef8ba6df45f463589ff",
   "name": "Russian twist",
   "description": "stability movement",
   "belongsTo": [
@@ -85,9 +73,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a00"
-  },
+  "_id": "6727bef8ba6df45f46358a00",
   "name": "Bicep curls",
   "description": "pull movement up",
   "belongsTo": [
@@ -99,9 +85,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a01"
-  },
+  "_id": "6727bef8ba6df45f46358a01",
   "name": "Overhead press",
   "description": "push movement up",
   "belongsTo": [
@@ -114,9 +98,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a02"
-  },
+  "_id": "6727bef8ba6df45f46358a02",
   "name": "Farmer's walk",
   "description": "stability movement",
   "belongsTo": [
@@ -128,9 +110,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a03"
-  },
+  "_id": "6727bef8ba6df45f46358a03",
   "name": "Calf raises",
   "description": "push movement up",
   "belongsTo": [
@@ -143,9 +123,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a04"
-  },
+  "_id": "6727bef8ba6df45f46358a04",
   "name": "Tricep dips",
   "description": "push movement down",
   "belongsTo": [
@@ -157,9 +135,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a05"
-  },
+  "_id": "6727bef8ba6df45f46358a05",
   "name": "Lunges",
   "description": "push movement up",
   "belongsTo": [
@@ -171,9 +147,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a06"
-  },
+  "_id": "6727bef8ba6df45f46358a06",
   "name": "Face pulls",
   "description": "pull movement up",
   "belongsTo": [
@@ -184,9 +158,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a07"
-  },
+  "_id": "6727bef8ba6df45f46358a07",
   "name": "Pull ups",
   "description": "pull movement up",
   "belongsTo": [
@@ -198,9 +170,7 @@
   ]
 },
 {
-  "_id": {
-    "$oid": "6727bef8ba6df45f46358a08"
-  },
+  "_id": "6727bef8ba6df45f46358a08",
   "name": "Back extension",
   "description": "push movement up",
   "belongsTo": [
