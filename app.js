@@ -14,11 +14,14 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+const cors = require('cors')
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 const musclegroupsRoutes = require('./routes/musclegroups.routes')
 const workoutsRoutes = require('./routes/workouts.routes')
 const exercisesRoutes = require('./routes/exercises.routes')
+
+app.use(cors())
 
 app.use("/api", indexRoutes);
 
