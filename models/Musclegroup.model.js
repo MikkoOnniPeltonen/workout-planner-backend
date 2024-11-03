@@ -6,11 +6,7 @@ const musclegroupSchema = new Schema(
       type: String,
       required: [true, 'Name is required.'],
       unique: true
-    },
-    exercises: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Exercise'
-    }]
+    }
   }
 );
 
