@@ -61,7 +61,7 @@ router.post('/login', (req, res) => {
 
     //VALIDATE
     if (email ==="" || password=="") {
-        console.log("no email or passwrod")
+        console.log("no email or password")
         res.status(400).json({errorMessage: "Please fill in all the required fields"})
         return
     }
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
             const { email, name, _id } = foundUser
 
             const payload = { email, name, _id }
-
+            console.log(payload)
             // method that returns the JWT token
             const authToken = jwt.sign(
                 payload,

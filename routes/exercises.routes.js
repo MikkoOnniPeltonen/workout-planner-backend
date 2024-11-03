@@ -12,17 +12,18 @@ router.post('/by-muscle-groups', isAuthenticated,  async (req, res) => {
     console.log(req.body)
     try {
         const muscleGroupNames = await Musclegroup.find({ name: { $in: muscleGroups } })
-        console.log(muscleGroups)
+        console.log(muscleGroupNames)
 
         const muscleGroupIds = muscleGroupNames.map(muscleGroup => muscleGroup._id)
         console.log(muscleGroupIds)
 
-        const exercises = await Exercise.find({ belongsTo: { $in: muscleGroupIds } }).populate('belongsTo').limit(5)
+        const exercises = await Exercise.find({ belongsTo: { $in: muscleGroupIds } }).limit(5)
         console.log(exercises)
             
         const workout = {
             name: workoutName,
-            exercises: exercises
+            exercises: exercises.map(exercises => exercises._id),
+            creator: req.payload._id
         }
         console.log(workout)
         const savedWorkout = await Workout.create(workout)
