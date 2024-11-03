@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a0b"
+  },
+  "name": "Back"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a0c"
+  },
+  "name": "Chest"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a0d"
+  },
+  "name": "Legs"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a0e"
+  },
+  "name": "Upper Back"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a0f"
+  },
+  "name": "Core"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a10"
+  },
+  "name": "Shoulders"
+},
+{
+  "_id": {
+    "$oid": "6727bf13ba6df45f46358a11"
+  },
+  "name": "Arms"
+}]

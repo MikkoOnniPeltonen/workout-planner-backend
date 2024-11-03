@@ -1,0 +1,212 @@
+[{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589fa"
+  },
+  "name": "Romanian deadlift",
+  "description": "lift movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0b",
+    "6727bf13ba6df45f46358a0d"
+  ],
+  "usedWith": [
+    "Barbell",
+    "Resistance band"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589fb"
+  },
+  "name": "Squat",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0d",
+    "6727bf13ba6df45f46358a0f"
+  ],
+  "usedWith": [
+    "Barbell",
+    "Squat machine"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589fc"
+  },
+  "name": "Bench press",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a10",
+    "6727bf13ba6df45f46358a0c"
+  ],
+  "usedWith": [
+    "Barbell",
+    "Dumbbells"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589fd"
+  },
+  "name": "Lat pulldown",
+  "description": "pull movement down",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0e"
+  ],
+  "usedWith": [
+    "Lat machine"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589fe"
+  },
+  "name": "Single arm row",
+  "description": "pull movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0e"
+  ],
+  "usedWith": [
+    "Dumbbells",
+    "Resistance band"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f463589ff"
+  },
+  "name": "Russian twist",
+  "description": "stability movement",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0f"
+  ],
+  "usedWith": [
+    "Dumbbells",
+    "No weights"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a00"
+  },
+  "name": "Bicep curls",
+  "description": "pull movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a11"
+  ],
+  "usedWith": [
+    "Kettlebells",
+    "Dumbbells"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a01"
+  },
+  "name": "Overhead press",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0c",
+    "6727bf13ba6df45f46358a10"
+  ],
+  "usedWith": [
+    "Barbell",
+    "Dumbbells"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a02"
+  },
+  "name": "Farmer's walk",
+  "description": "stability movement",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0f"
+  ],
+  "usedWith": [
+    "Kettlebells",
+    "No weights"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a03"
+  },
+  "name": "Calf raises",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0d"
+  ],
+  "usedWith": [
+    "Dumbbells",
+    "Resistance band",
+    "No weights"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a04"
+  },
+  "name": "Tricep dips",
+  "description": "push movement down",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0c",
+    "6727bf13ba6df45f46358a11"
+  ],
+  "usedWith": [
+    "No weights"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a05"
+  },
+  "name": "Lunges",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0d"
+  ],
+  "usedWith": [
+    "Dumbbells",
+    "No weights"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a06"
+  },
+  "name": "Face pulls",
+  "description": "pull movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0e"
+  ],
+  "usedWith": [
+    "Resistance band"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a07"
+  },
+  "name": "Pull ups",
+  "description": "pull movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0e",
+    "6727bf13ba6df45f46358a0b"
+  ],
+  "usedWith": [
+    "Pull up-bar"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6727bef8ba6df45f46358a08"
+  },
+  "name": "Back extension",
+  "description": "push movement up",
+  "belongsTo": [
+    "6727bf13ba6df45f46358a0b"
+  ],
+  "usedWith": [
+    "Roman chair"
+  ]
+}]

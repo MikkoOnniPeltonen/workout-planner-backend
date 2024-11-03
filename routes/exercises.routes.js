@@ -18,7 +18,7 @@ router.post('/by-muscle-groups', isAuthenticated,  async (req, res) => {
         console.log(muscleGroupIds)
 
         const exercises = await Exercise.find({ belongsTo: { $in: muscleGroupIds } }).limit(5)
-        console.log(exercises)
+        console.log('found exercises by id of musclegroup', exercises)
             
         const workout = {
             name: workoutName,
