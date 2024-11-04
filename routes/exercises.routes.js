@@ -14,12 +14,11 @@ router.post('/by-muscle-groups', isAuthenticated,  async (req, res) => {
         const muscleGroupIds = await Musclegroup.find({ name: { $in: muscleGroups } })
         console.log(muscleGroupIds)
 
-        const exercises = await Exercise.find({ belongsTo: { $in: muscleGroupIds } })
-        .select('_id')
-        .limit(5)
-        .lean()
-        .then(exercises => exercises.map(exercise => exercise._id))
+        const exercises = await Exercise.aggregate([{ belongsTo: { $in: muscleGroupIds } }, { $limit: 5 }])
+        .then(results => results.map(exercise => exercise._id))
             
+        console.log(exercises)
+        
         const workout = {
             name: workoutName,
             exercises: exercises,
