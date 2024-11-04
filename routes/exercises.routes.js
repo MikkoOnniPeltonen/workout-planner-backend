@@ -17,7 +17,19 @@ router.post('/by-muscle-groups', isAuthenticated,  async (req, res) => {
         const muscleGroupIds = muscleGroupNames.map(muscleGroup => muscleGroup._id)
         console.log(muscleGroupIds)
 
-        const exercises = await Exercise.find({ belongsTo: { $elemMatch: { _id: muscleGroupIds } } }).limit(5)
+        const exercises3 = await Exercise.find([{ 'belongsTo._id': muscleGroupIds }]).limit(5)
+        console.log('first test exercise array', exercises3)
+
+        const exercises5 = await Exercise.aggregate([{ belongsTo: { $match:  { _id: muscleGroupIds } } }]).limit(5)
+        console.log('second test exercise array', exercises5)
+
+        const exercises10 = await Exercise.find([{ 'belongsTo._id': muscleGroupIds }]).limit(5)
+        console.log('third test exercise array', exercises10)
+
+        const exercises2 = await Exercise.aggregate([{ $match: { 'belongsTo': { _id: muscleGroupIds } } }]).limit(5)
+        console.log('fourth array of test', exercises2)
+
+        const exercises = await Exercise.find([{ belongsTo: { $in: muscleGroupIds } }]).limit(5)
         console.log('found exercises by id of musclegroup', exercises)
             
         const workout = {
