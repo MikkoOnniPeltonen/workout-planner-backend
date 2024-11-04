@@ -2,18 +2,19 @@
 
 const router = require('express').Router()
 const Workout = require('../models/Workout.model')
-const Musclegroup = require('../models/Musclegroup.model')
 
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
-router.get('/', (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
 
-    Workout.find()
-    .populate('exercises')
-    .then((allWorkouts) => {
-        res.json(allWorkouts)
-    })
-    .catch((err) => {res.json(err)})
+    try {
+        const userId = req.payload._id
+        console.log('User id was found: ', userId)
+        const workouts = await Workout.find({ creator: userId }).populate('exercises')
+        res.json(workouts)
+    } catch (error) {
+        res.status(500).json({ errorMessage: 'Error fetching workouts', error })
+    }
 
 })
 
@@ -42,7 +43,8 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
     try {
         const { name, exercises } = req.body
         const creatorId = req.payload._id
-
+        console.log('creator id is: ', creatorId)
+        
         const existingWorkout = await Workout.findById(req.params.workoutId)
         if (!existingWorkout) {
             return res.status(404).json({ errorMessage: "Workout not found" })
@@ -86,13 +88,23 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
 router.delete('/:workoutId', isAuthenticated, async (req, res) => {
 
     try {
+        const workout = await Workout.findById(req.params.workoutId)
+
+        if (!workout) {
+            return res.status(404).json({ errorMessage: 'Workout not found'})
+        }
+
+        if (workout.creator.toString() !== req.payload._id) {
+            return res.status(403).json({ errorMessage: 'You are not authorized to delete this workout'})
+        }
+
         const deletedWorkout = await Workout.findByIdAndDelete(req.params.workoutId)
 
-        res.json(deletedWorkout)
+        res.json({ message: 'Workout deleted succesfully', deletedWorkout })
 
     }
     catch(err) {
-        res.json(err)
+        res.status(500).json({ errorMessage: 'Error deleting workout', err})
     }
 })
 
