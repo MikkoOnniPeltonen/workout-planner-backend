@@ -17,23 +17,31 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/:workoutId', (req, res) => {
+router.post('/', isAuthenticated,  async (req, res) => {
 
-    Workout.findById(req.params.workoutId)
-    .populate('exercises')
-    .then((foundWorkout) => {
-        res.json(foundWorkout)
-    })
-    .catch((err) => {
-        res.json(err)
-    })
+    console.log(req.body)
+    try {
+        const { name, exercises } = req.body
+        let workout = {
+            name: name,
+            exercises: exercises,
+            creator: req.payload._id
+        }
+        
+        console.log(workout)
+        const savedWorkout = await Workout.create(workout)
+        res.json(savedWorkout)
+    } catch (error) {
+        console.error('Error creating a workout', error)
+        res.status(500).json({ errorMessage: 'Server error'})
+    }
 })
 
 router.put('/:workoutId', isAuthenticated, async (req, res) => {
 
     try {
         const { name, exercises } = req.body
-        const creatorId = req.user._id
+        const creatorId = req.payload._id
 
         const existingWorkout = await Workout.findById(req.params.workoutId)
         if (!existingWorkout) {
