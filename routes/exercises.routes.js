@@ -14,9 +14,13 @@ router.post('/by-muscle-groups', isAuthenticated,  async (req, res) => {
         const muscleGroupIds = await Musclegroup.find({ name: { $in: muscleGroups } })
         console.log(muscleGroupIds)
 
-        const exercises = await Exercise.aggregate([{ belongsTo: { $in: muscleGroupIds } }, { $limit: 5 }])
+        const exercises = await Exercise.aggregate([{ $match: { belongsTo: muscleGroupIds } }, { $limit: 5 }])
+        
+        console.log('First array', exercises)
+
+        const exercises2 = await Exercise.find({ belongsTo: { $in: muscleGroupIds } }).limit(5)
             
-        console.log(exercises)
+        console.log(exercises2)
 
         const workout = {
             name: workoutName,
