@@ -21,10 +21,7 @@ const musclegroupsRoutes = require('./routes/musclegroups.routes')
 const workoutsRoutes = require('./routes/workouts.routes')
 const exercisesRoutes = require('./routes/exercises.routes')
 
-app.use(cors())
-
 app.use("/api", indexRoutes);
-
 app.use('/auth', require('./routes/auth.routes'))
 
 app.use('/exercises', exercisesRoutes)
