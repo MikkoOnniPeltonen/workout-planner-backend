@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 const Workout = require('../models/Workout.model')
-
+const mongoose = require('mongoose')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 router.get('/', isAuthenticated, async (req, res) => {
@@ -10,7 +10,7 @@ router.get('/', isAuthenticated, async (req, res) => {
     try {
         const userId = req.payload._id
         console.log('User id was found: ', userId)
-        const workouts = await Workout.find({ creator: userId }).populate('exercises')
+        const workouts = await Workout.find({ creator: mongoose.Types.ObjectId(userId) }).populate('exercises')
         
         if (workouts.length === 0) {
             return res.status(200).json({ 
@@ -18,7 +18,7 @@ router.get('/', isAuthenticated, async (req, res) => {
                 workouts: []
             })
         }
-
+        console.log(workouts)
         res.json(workouts)
     } catch (error) {
         res.status(500).json({ errorMessage: 'Error fetching workouts', error })
