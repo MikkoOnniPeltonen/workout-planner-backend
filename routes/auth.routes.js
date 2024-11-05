@@ -3,116 +3,75 @@ const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
+const { body, validationResult } = require('express-validator')
 
 // POST /signup route
-router.post('/signup', (req, res) => {
+router.post('/signup', [
+    body('name').notEmpty().withMessage('Name is required'),
+    body('email').notEmpty().withMessage('Please provide a valid email.'),
+    body('password').matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/).withMessage('Password must be at least 6 characters long and contain at least one number and one uppercase letter.')
+], async (req, res) => {
 
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
     const { name, email, password } = req.body
 
-    if (name==="", email==="", password==="") {
-        res.status(400).json({errorMessage: "Please provide all the mandatory fields"})
-        return
-    }
+    try {
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-    if (!emailRegex.test(email)) {
-        res.status(400).json({errorMessage:"Please provide a valid email."})
-        return
-    }
-
-    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-    if (!passwordRegex.test(password)) {
-        res.status(400).json({errorMessage: "Password did not match the requirements. Please provide a new password."})
-        return
-    }
-
-    User.findOne({email})
-    .then((foundUser) => {
-
+        const foundUser = await User.findOne({ email })
         if (foundUser) {
-            res.status(400).json({errorMessage:"Email already in use."})
-            return
+            return res.status(400).json({ errorMessage: 'Email already in use.' })
         }
-    })
 
-    const salt = bcrypt.genSaltSync(10)
-    // hashSync is the method that encrypts our password
-    const encryptedPassword = bcrypt.hashSync(password, salt)
+        const salt = bcrypt.genSaltSync(10)
+        const encryptedPassword = bcrypt.hashSync(password, salt)
 
-    console.log(encryptedPassword)
-
-    User.create({ name, email, password:encryptedPassword })
-    .then((createdUser) => {
+        const createdUser = await User.create({ name, email, password: encryptedPassword })
         res.status(201).json(createdUser)
-    })
-    .catch((err) => {
-        res.status(400).json({errorMessage:'email should be unique, please sign up with unique email.'})
-        console.log(err)
-    })
+    
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ errorMessage: 'Error creating user.' })
+    }
 })
 
 
 // POST /login route
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
 
 
     const { email, password } = req.body
 
 
     //VALIDATE
-    if (email ==="" || password=="") {
-        console.log("no email or password")
-        res.status(400).json({errorMessage: "Please fill in all the required fields"})
-        return
+    if (!email || !password) {
+        return res.status(400).json({ errorMessage: 'Please fill in all the required fields.' })
     }
 
-    // CHECK IF THE PASSWORD IS CORRECT
+    try {
 
-    User.findOne({email: email})
-    .then((foundUser) => {
-
+        const foundUser = await User.findOne({ email })
         if (!foundUser) {
-            consoe.log("user not found")
-            res.status(400).json({errorMessage: "Please sign up, no account with this email listed."})
-            return
+            return res.status(400).json({ errorMessage: 'No account with this email listed. Please sign up.' })
         }
         
         const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
-
-        if (passwordCorrect) {
-
-            // CREATE THE TOKEN
-
-            const { email, name, _id } = foundUser
-
-            const payload = { email, name, _id }
-            console.log(payload)
-            // method that returns the JWT token
-            const authToken = jwt.sign(
-                payload,
-                process.env.TOKEN_SECRET,
-                {algorithm:'HS256', expiresIn:'6h'}
-            )
-
-            console.log(authToken)
-
-            // SEND BACK THE TOKEN
-            res.json({authToken: authToken})
-            return
-
+        if (!passwordCorrect) {
+            return res.status(400).json({ errorMessage: 'Password or email is incorrect.' })
         }
-        else {
-            console.log("in else")
-            res.status(400).json({errorMessage:"Password or email is incorrect"})
-            return
-        }
-    })
-    .catch((err) => {
-        console.log("in catch")
-        res.json(err)
-    })
+        
+        const { _id, name } = foundUser
+        const payload = { _id, name, email }
+        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, { algorithm: 'H256', expiresIn: '6h' })
+    
+        res.json({ authToken })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ errorMessage: 'Error logging in.' })
 
-
+    }
 })
 
 router.get('/verify', isAuthenticated, (req, res) => {
