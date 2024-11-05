@@ -5,13 +5,15 @@ const router = require('express').Router()
 const Musclegroup = require('../models/Musclegroup.model')
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
-    Musclegroup.find()
-    .then((allMusclegroups) => {
-        res.json(allMusclegroups)
-    })
-    .catch((err) => {res.json(err)})
+    try {
+        const allMusclegroups = await Musclegroup.find()
+        res.status(200).json(allMusclegroups)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Failed to retrieve muscle groups', error: error.message })
+    }
 })
 
 
