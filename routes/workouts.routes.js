@@ -13,7 +13,7 @@ router.get('/', isAuthenticated, async (req, res) => {
         const workouts = await Workout.find({ creator: userId }).populate('exercises')
         
         if (workouts.length === 0) {
-            return res.sendStatus(204).json({ message: "No workouts found for this user."})
+            return res.sendStatus(204).json({ message: "Message from backend: No workouts found for this user."})
         }
 
         res.json(workouts)
