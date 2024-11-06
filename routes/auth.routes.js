@@ -75,8 +75,11 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/verify', isAuthenticated, (req, res) => {
-
-    res.json(req.payload)
+    try {
+        res.json({ message: 'Verification succesful', payload: req.payload })
+    } catch (error) {
+        res.status(500).json({ errorMessage: 'Server error during verification ', error })
+    }
 })
 
 module.exports = router

@@ -2,23 +2,33 @@
 
 const {expressjwt: jwt} = require('express-jwt')
 
+const TOKEN_SECRET = process.env.TOKEN_SECRET
+const TOKEN_ALGORITHM = 'HS256'
+
 const isAuthenticated = jwt({
-    secret: process.env.TOKEN_SECRET,
-    algorithms: ['HS256'],
+    secret: TOKEN_SECRET,
+    algorithms: [TOKEN_ALGORITHM],
     requestProperty: 'payload',
     getToken: getTokenFromHeaders
 })
 
 function getTokenFromHeaders(req) {
 
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-        const token = req.headers.authorization.split(' ')[1]
-        console.log('Middleware responded with: ', token)
+    const authHeader = req.headers.authorization
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.split(' ')[1]
         return token
     }
 
     return null
-
 }
 
-module.exports = {isAuthenticated}
+function jwtErrorHandler(err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        return res.status(401).json({ errorMessage: 'Invalid or missing token' })
+    }
+    next(err)
+}
+
+module.exports = { isAuthenticated, jwtErrorHandler }
