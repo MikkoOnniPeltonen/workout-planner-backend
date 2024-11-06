@@ -3,7 +3,24 @@
 const router = require('express').Router()
 const Workout = require('../models/Workout.model')
 const mongoose = require('mongoose')
+const _ = require('lodash')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
+
+router.get('/by-musclegroup/:workoutId', async (req, res) => {
+    try {
+        const workout = await Workout.findById(req.params.workoutId)
+        .populate({ path: 'exercises', populate: { path: 'belongsTo', model: 'Musclegroup'}})
+    
+        if (!workout) {
+            return res.status(404).json({ message: 'Workout not found' })
+        }
+
+        res.json(workout)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ errorMessage: 'Server error' })
+    }
+})
 
 router.get('/', isAuthenticated, async (req, res) => {
 
@@ -59,15 +76,15 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
         }
 
         const updatedFields = {
-            creator: creatorId
+            creator: mongoose.Types.ObjectId(creatorId)
         }
 
         if (name && name !== existingWorkout.name) {
             updatedFields.name = name
         }
 
-        if (exercises && JSON.stringify(exercises) !== JSON.stringify(existingWorkout.exercises)) {
-            updatedFields.exercises = exercises
+        if (exercises && !_.isEqual(exercises, existingWorkout.exercises)) {
+            updatedFields.exercises = exercises.map(exerciseId => mongoose.Types.ObjectId(exerciseId))
         }
 
         if (Object.keys(updatedFields).length > 0) {
