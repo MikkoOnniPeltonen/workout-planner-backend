@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ errorMessage: 'No account with this email listed. Please sign up.' })
         }
         
-        const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
+        const passwordCorrect = bcrypt.compare(password, foundUser.password)
         if (!passwordCorrect) {
             return res.status(400).json({ errorMessage: 'Password or email is incorrect.' })
         }
