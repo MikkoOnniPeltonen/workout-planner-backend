@@ -2,12 +2,13 @@
 
 const router = require('express').Router()
 const Workout = require('../models/Workout.model')
+const mongoose = require('mongoose')
 const _ = require('lodash')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 router.get('/by-musclegroup/:workoutId', async (req, res) => {
     try {
-        const workout = await Workout.findById(req.params.workoutId)
+        const workout = await Workout.findById(mongoose.Types.ObjectId(req.params.workoutId))
         .populate({ path: 'exercises', populate: { path: 'belongsTo', model: 'Musclegroup'}})
     
         if (!workout) {
@@ -26,7 +27,7 @@ router.get('/', isAuthenticated, async (req, res) => {
     try {
         const userId = req.payload._id
         console.log('User id was found: ', userId)
-        const workouts = await Workout.find({ creator: userId }).populate('exercises')
+        const workouts = await Workout.find({ creator: mongoose.Types.ObjectId(userId) }).populate('exercises')
         
         if (workouts.length === 0) {
             return res.status(200).json({ 
@@ -69,7 +70,7 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
         const creatorId = req.payload._id
         console.log('creator id is: ', creatorId)
         
-        const existingWorkout = await Workout.findById(req.params.workoutId)
+        const existingWorkout = await Workout.findById(mongoose.Types.ObjectId(req.params.workoutId))
         if (!existingWorkout) {
             return res.status(404).json({ errorMessage: "Workout not found" })
         }
@@ -87,7 +88,7 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
         }
 
         if (Object.keys(updatedFields).length > 0) {
-            const updatedWorkout = await Workout.findByIdAndUpdate(req.params.workoutId, updatedFields, { new: true })
+            const updatedWorkout = await Workout.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.workoutId), updatedFields, { new: true })
             res.json(updatedWorkout)
         } else {
             res.json(existingWorkout)
@@ -96,23 +97,13 @@ router.put('/:workoutId', isAuthenticated, async (req, res) => {
         console.error('Error updating workout', error)
         res.status(500).json({ errorMessage: 'Server error' })
     }
-    
-
-
-    Workout.findByIdAndUpdate(req.params.workoutId, req.body, {new: true})
-    .then((updatedWorkout) => {
-        res.json(updatedWorkout)
-    })
-    .catch((err) => {
-        res.json(err)
-    })
 })
 
 
 router.delete('/:workoutId', isAuthenticated, async (req, res) => {
 
     try {
-        const workout = await Workout.findById(req.params.workoutId)
+        const workout = await Workout.findById(mongoose.Types.ObjectId(req.params.workoutId))
 
         if (!workout) {
             return res.status(404).json({ errorMessage: 'Workout not found'})
@@ -122,7 +113,7 @@ router.delete('/:workoutId', isAuthenticated, async (req, res) => {
             return res.status(403).json({ errorMessage: 'You are not authorized to delete this workout'})
         }
 
-        const deletedWorkout = await Workout.findByIdAndDelete(req.params.workoutId)
+        const deletedWorkout = await Workout.findByIdAndDelete(mongoose.Types.ObjectId(req.params.workoutId))
 
         res.json({ message: 'Workout deleted succesfully', deletedWorkout })
 
