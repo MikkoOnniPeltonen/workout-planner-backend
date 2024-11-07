@@ -6,9 +6,8 @@ const workoutSchema = new Schema(
     name: {
       type: String,
       required: [true, 'Name is required.'],
-      unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
     },
     exercises: [{
         type: Schema.Types.ObjectId,
