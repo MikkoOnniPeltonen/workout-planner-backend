@@ -18,6 +18,7 @@ function getTokenFromHeaders(req) {
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
         const token = authHeader.split(' ')[1]
+        console.log('middleware token: ', token)
         return token
     }
 
