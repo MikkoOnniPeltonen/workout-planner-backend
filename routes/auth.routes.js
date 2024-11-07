@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, { algorithm: "HS256", expiresIn: "6h" })
     
         console.log({ authToken })
-        res.json({ authToken })
+        res.json({ token: authToken })
     } catch (error) {
         console.error(error)
         res.status(500).json({ errorMessage: 'Error logging in.' })
