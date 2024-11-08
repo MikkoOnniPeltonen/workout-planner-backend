@@ -3,7 +3,6 @@
 const router = require('express').Router()
 
 const User = require('../models/User.model')
-const mongoose = require('mongoose')
 
 router.get('/', async (req, res) => {
 
@@ -11,7 +10,7 @@ router.get('/', async (req, res) => {
         console.log('In user route')
         const userId = req.payload._id
         console.log('user Id: ', userId)
-        const userData = await User.findById(mongoose.Types.ObjectId(userId))
+        const userData = await User.findById(userId)
         console.log('found user: ', userData)
         res.status(200).json(userData.name)
     } catch (error) {
