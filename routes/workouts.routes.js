@@ -26,7 +26,7 @@ router.get('/', isAuthenticated, async (req, res) => {
     try {
         const userId = req.payload._id
         console.log('User id was found: ', userId)
-        const workouts = await Workout.find({ creator: userId }).populate('exercises')
+        const workouts = await Workout.find({ creator: userId }).populate("exercises")
         
         if (workouts.length === 0) {
             return res.status(200).json({ 
