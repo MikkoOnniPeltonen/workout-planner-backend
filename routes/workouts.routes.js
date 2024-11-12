@@ -2,6 +2,7 @@
 
 const router = require('express').Router()
 const Workout = require('../models/Workout.model')
+const mongoose = require('mongoose')
 const _ = require('lodash')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
@@ -51,7 +52,7 @@ router.post('/', isAuthenticated,  async (req, res) => {
         let workout = {
             name: name,
             exercises: exercises,
-            creator: req.payload._id
+            creator: mongoose.Types.ObjectId(req.payload._id)
         }
         
         console.log(workout)

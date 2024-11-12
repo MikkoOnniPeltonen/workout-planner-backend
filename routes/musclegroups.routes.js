@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
     try {
         const allMusclegroups = await Musclegroup.find()
-        res.status(200).json(allMusclegroups)
+        res.json(allMusclegroups)
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Failed to retrieve muscle groups', error: error.message })
