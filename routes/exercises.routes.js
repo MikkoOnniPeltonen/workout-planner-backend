@@ -4,15 +4,14 @@ const router = require('express').Router()
 const Exercise = require('../models/Exercise.model')
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
-    Exercise.find()
-    .then((allExercises) => {
+    try {
+        const allExercises = await Exercise.find()
         res.json(allExercises)
-    })
-    .catch((err) => {
-        res.status(500).json(err)
-    })
+    } catch (error) {
+        res.status(500).json(error)
+    }
 })
 
 module.exports = router
