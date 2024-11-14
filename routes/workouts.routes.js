@@ -21,15 +21,16 @@ router.get('/by-musclegroup/:workoutId', async (req, res) => {
     }
 })
 
+
 router.get('/', isAuthenticated, async (req, res) => {
 
     try {
         const userId = req.payload._id
         console.log('User id was found: ', userId)
         const workouts = await Workout.find({ creator: userId })
-        .populate({ path: 'exercises', populate: { path: 'belongsTo' } })
-        .exec()
+        .populate( { path: 'exercises', populate: { path: 'belongsTo', model: 'Musclegroup' } })
         
+
         console.log(workouts)
         res.json(workouts)
     } catch (error) {
