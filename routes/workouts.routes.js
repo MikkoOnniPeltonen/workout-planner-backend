@@ -28,7 +28,7 @@ router.get('/', isAuthenticated, async (req, res) => {
         const userId = req.payload._id
         console.log('User id was found: ', userId)
         const workouts = await Workout.find({ creator: userId })
-        .populate( { path: 'exercises', populate: { path: 'belongsTo', model: 'Musclegroup' } })
+        .populate( { path: 'exercises', populate: { path: 'belongsTo', model: 'Musclegroup' } }).limit(5)
         
 
         console.log(workouts)

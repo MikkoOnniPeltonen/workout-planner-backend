@@ -3,7 +3,6 @@ const router = require('express').Router()
 
 const Exercise = require('../models/Exercise.model')
 
-
 router.get('/', async (req, res) => {
 
     try {

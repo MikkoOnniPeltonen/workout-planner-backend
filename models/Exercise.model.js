@@ -21,7 +21,10 @@ const exerciseSchema = new Schema(
     }],
     usedWith: [{
       type: String
-    }]
+    }],
+    videoUrl: {
+      type: String
+    }
   }
 );
 
